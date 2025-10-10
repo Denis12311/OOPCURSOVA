@@ -1,0 +1,84 @@
+﻿<Window x:Class="OOPCURSOVA.Views.StudentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OOPCURSOVA.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    
+
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Фильтр -->
+            <RowDefinition Height="2*"/>
+            <!-- Студенты -->
+            <RowDefinition Height="Auto"/>
+            <!-- Средний балл -->
+            <RowDefinition Height="*"/>
+            <!-- Оценки -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопки -->
+        </Grid.RowDefinitions>
+
+        <!-- Фильтр -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBox Width="150" Margin="0,0,10,0"
+             Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox Width="100" Margin="0,0,10,0"
+             Text="{Binding FilterGroup, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox Width="100" Margin="0,0,10,0"
+             Text="{Binding MinAverageText, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Button Content="Фильтр" Width="100" Command="{Binding FilterCommand}"/>
+        </StackPanel>
+
+        <!-- Таблица студентов -->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Students}" 
+                  SelectedItem="{Binding SelectedStudent}" 
+                  AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="*"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="*"/>
+                <DataGridTextColumn Header="Группа" Binding="{Binding Group}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Средний балл студента -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,5">
+            <TextBlock Text="Средний балл: " FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding AverageGrade, StringFormat=F2}" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Таблица оценок -->
+        <DataGrid Grid.Row="3" ItemsSource="{Binding Grades}" 
+                  SelectedItem="{Binding SelectedGrade}" 
+                  AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Предмет" 
+                                    Binding="{Binding Subject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                <DataGridTextColumn Header="Оценка" 
+                                    Binding="{Binding Score, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Кнопки управления -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <!-- Студенты -->
+            <Button Content="Добавить студента" Width="150" Margin="5" Command="{Binding AddStudentCommand}"/>
+            <Button Content="Редактировать студента" Width="150" Margin="5" Command="{Binding UpdateStudentCommand}"/>
+            <Button Content="Удалить студента" Width="150" Margin="5" Command="{Binding DeleteStudentCommand}"/>
+
+            <!-- Оценки -->
+            <Button Content="Добавить оценку" Width="120" Margin="5" Command="{Binding AddGradeCommand}"/>
+            <Button Content="Редактировать оценку" Width="120" Margin="5" Command="{Binding UpdateGradeCommand}"/>
+            <Button Content="Удалить оценку" Width="120" Margin="5" Command="{Binding DeleteGradeCommand}"/>
+        </StackPanel>
+
+    </Grid>
+
+</Window>

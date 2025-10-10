@@ -1,0 +1,9 @@
+﻿<Application x:Class="OOPCURSOVA.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:OOPCURSOVA"
+             StartupUri="Views/StudentView.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
